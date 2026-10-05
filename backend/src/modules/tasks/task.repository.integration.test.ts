@@ -28,4 +28,45 @@ describe('TaskRepository integration', () => {
     expect(createdTask.props.status).toBe(task.props.status);
     expect(createdTask.props.assignedTo).toBe(task.props.assignedTo);
   });
+
+  it('should list all tasks', async () => {
+    const firstTask = await repository.createTask(Task.create({
+      id: null,
+      title: 'First listed task',
+      status: TaskStatus.TODO,
+      assignedTo: null,
+    }));
+    const secondTask = await repository.createTask(Task.create({
+      id: null,
+      title: 'Second listed task',
+      status: TaskStatus.IN_PROGRESS,
+      assignedTo: null,
+    }));
+
+    const tasks = await repository.getAllTasks();
+
+    expect(tasks.map((task) => task.props.id)).toEqual(
+      expect.arrayContaining([firstTask.props.id, secondTask.props.id]),
+    );
+    expect(tasks.find(task => task.props.id === firstTask.props.id)?.props).toStrictEqual(firstTask.props);
+  });
+
+  it('should get a task by id', async () => {
+    const createdTask = await repository.createTask(Task.create({
+      id: null,
+      title: 'Task found by id',
+      status: TaskStatus.IN_PROGRESS,
+      assignedTo: null,
+    }));
+
+    const task = await repository.getTaskById(createdTask.props.id!);
+
+    expect(task?.props).toStrictEqual(createdTask.props);
+  });
+
+  it('should return null when a task id does not exist', async () => {
+    const task = await repository.getTaskById(0);
+
+    expect(task).toBeNull();
+  });
 });

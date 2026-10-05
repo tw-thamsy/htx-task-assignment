@@ -16,6 +16,16 @@ export class TaskRepository {
     task.setId(res.identifiers[0].id);
     return task;
   }
+
+  async getAllTasks(): Promise<Task[]> {
+    const tasks = await this.tasks.find();
+    return tasks.map(toTask);
+  }
+
+  async getTaskById(id: number): Promise<Task | null> {
+    const task = await this.tasks.findOneBy({ id });
+    return task ? toTask(task) : null;
+  }
 }
 
 export function toTaskOrm(task: Task): DeepPartial<TaskTypeOrm> {

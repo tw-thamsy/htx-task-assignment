@@ -1,0 +1,25 @@
+{
+  "pgsql.connections": [
+    {
+      "id": "996B4C95-A3DF-4842-BCD1-1D9388D2FD2E",
+      "groupId": "562C0F71-EE3A-4BC9-8475-B8E7B9A67683",
+      "authenticationType": "SqlLogin",
+      "connectTimeout": 15,
+      "applicationName": "htx-task-assignment",
+      "clientEncoding": "utf8",
+      "sslmode": "disable",
+      "sshSavePassword": true,
+      "savePassword": true,
+      "sslRootCertMode": "none",
+      "server": "htx-task-assignment-local",
+      "user": "task_assignment_user",
+      "password": "",
+      "database": "task_assignment",
+      "profileName": "htx-task-assignment-local, task_assignment (task_assignment_user)",
+      "port": "5432",
+      "hostaddr": "127.0.0.1",
+      "expiresOn": 0,
+      "sshPassword": ""
+    }
+  ]
+}

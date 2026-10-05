@@ -32,3 +32,7 @@
       ```bash
       colima start
       ```
+    - Deploy Postgres
+      ```bash
+      docker compose -f ./deployments/local/docker-compose.yml up -d
+      ```

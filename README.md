@@ -28,6 +28,7 @@
   - Backend
     ```bash
     cd backend
+    cp .env.local .env
     npm install
     cd -
     ```

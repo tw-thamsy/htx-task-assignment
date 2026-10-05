@@ -1,0 +1,30 @@
+services:
+  postgres:
+    container_name: htx-task-assignment-postgres-dev
+    image: postgres:latest
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: task_assignment
+      POSTGRES_USER: task_assignment_user
+      POSTGRES_PASSWORD: task_assignment_password
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql
+  backend:
+    container_name: htx-task-assignment-backend-dev
+    image: htx-task-assignment-backend:latest
+    ports:
+      - "3001:3000"
+    depends_on:
+      - postgres
+  frontend:
+    container_name: htx-task-assignment-frontend-dev
+    image: htx-task-assignment-frontend:latest
+    ports:
+      - "81:80"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:

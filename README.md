@@ -33,7 +33,7 @@
     ```
 
 
-## Usage
+## Quickstart
 
 1. Start Infrastructure
     - Start Docker (if not already autostarted)
@@ -55,4 +55,19 @@
    ```bash
    cd frontend
    npm run dev
+   ```
+
+## Deploy (all docker containers)
+
+Requires `make`, install if not yet installed
+
+1. Build all Docker containers
+   ```bash
+   make build
+   ```
+
+1. Deploy with `docker compose`
+   ```bash
+   make deploy_dev
+   # `make deploy_dev_down` to stop
    ```

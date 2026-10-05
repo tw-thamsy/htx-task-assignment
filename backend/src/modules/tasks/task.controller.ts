@@ -10,14 +10,7 @@ export class TaskController {
 
   @Post()
   async createTask(@Body() task: CreateTaskDto): Promise<TaskDto> {
-    const createdTask = await this.taskService.createTask(
-      Task.create({
-        id: null,
-        title: task.title,
-        status: task.status,
-        assignedTo: task.assignedTo,
-      }),
-    );
+    const createdTask = await this.taskService.createTask(task);
     return toTaskDto(createdTask);
   }
 }

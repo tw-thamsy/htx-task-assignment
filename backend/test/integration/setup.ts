@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { afterAll, afterEach, beforeAll, beforeEach } from 'vitest';
 import { DataSource, QueryRunner } from 'typeorm';
-import { TaskTypeOrm } from './task.typeorm.js';
+import { TaskTypeOrm } from '../../src/modules/tasks/task.typeorm.js';
 
 let dataSource: DataSource;
 export let queryRunner: QueryRunner;

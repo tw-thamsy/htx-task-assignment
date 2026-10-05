@@ -7,6 +7,6 @@ export default defineConfig({
     globals: true,
     root: './',
     include: ['**/*.integration.test.ts'],
-    setupFiles: ['./src/modules/tasks/task.repository.setup.ts'],
+    setupFiles: ['./test/integration/setup.ts'],
   },
 });

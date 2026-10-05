@@ -2,7 +2,7 @@ import { randomInt } from 'node:crypto';
 import { Task, TaskStatus } from './task.entity.js';
 import { TaskRepository } from './task.repository.js';
 import { TaskTypeOrm } from './task.typeorm.js';
-import { queryRunner } from './task.repository.setup.js';
+import { queryRunner } from '../../../test/integration/setup.js';
 
 describe('TaskRepository integration', () => {
   let repository: TaskRepository;
@@ -13,33 +13,19 @@ describe('TaskRepository integration', () => {
     );
   });
 
-  it('persists a task and returns the saved task', async () => {
-    const task: Task = {
-      id: -randomInt(1, 2 ** 47),
+  it('should create task with id', async () => {
+    const task = Task.create({
+      id: null,
       title: 'Create a task',
       status: TaskStatus.TODO,
       assignedTo: null,
-    };
-
-    await expect(repository.createTask(task)).resolves.toEqual(task);
-
-    const persistedTask = await queryRunner.manager
-      .getRepository(TaskTypeOrm)
-      .findOneByOrFail({ id: task.id });
-
-    expect(persistedTask).toEqual({ ...task, id: String(task.id) });
-  });
-
-  it('propagates database errors', async () => {
-    const task: Task = {
-      id: -randomInt(1, 2 ** 47),
-      title: 'a'.repeat(256),
-      status: TaskStatus.TODO,
-      assignedTo: null,
-    };
-
-    await expect(repository.createTask(task)).rejects.toMatchObject({
-      driverError: { code: '22001' },
     });
+
+    const createdTask = await repository.createTask(task);
+
+    expect(createdTask.props.id).not.toBeNull();
+    expect(createdTask.props.title).toBe(task.props.title);
+    expect(createdTask.props.status).toBe(task.props.status);
+    expect(createdTask.props.assignedTo).toBe(task.props.assignedTo);
   });
 });

@@ -1,4 +1,4 @@
-.PHONY: build-backend build-frontend build deploy_dev deploy_dev_down migrate_local migrate_dev
+.PHONY: build-backend build-frontend build deploy_dev deploy_dev_down migrate_local migrate_dev test
 
 build-backend:
 	docker build -t htx-task-assignment-backend -f build/backend/Dockerfile .
@@ -29,3 +29,7 @@ migrate_local:
 
 migrate_dev:
 	docker compose -f deployments/dev/docker-compose.yml run --rm flyway migrate
+
+## test
+test:
+	cd backend && npm test

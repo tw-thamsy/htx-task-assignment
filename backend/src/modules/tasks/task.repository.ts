@@ -41,9 +41,10 @@ export function toTaskOrm(task: Task): DeepPartial<TaskTypeOrm> {
 }
 export function toTask(ormTask: TaskTypeOrm): Task {
   return Task.create({
-    id: ormTask.id,
-    title: ormTask.title,
-    status: ormTask.status,
-    assignedTo: ormTask.assignedTo,
+   id: ormTask.id,
+   title: ormTask.title,
+   status: ormTask.status,
+   skillsRequired: ormTask.skillsRequired,
+   assignedTo: ormTask.assignedTo,
   });
 }

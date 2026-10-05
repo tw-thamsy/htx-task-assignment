@@ -1,3 +1,5 @@
+import { Skills } from '../skills/skills.constants.js';
+
 export enum TaskStatus {
   TODO = 'todo',
   IN_PROGRESS = 'in_progress',
@@ -8,10 +10,11 @@ type TaskProps = {
   id: number | null;
   title: string;
   status: TaskStatus;
+  skillsRequired: Skills[];
   assignedTo: number | null;
 };
 
-export class Task {
+  export class Task {
   private constructor(
     private _props: TaskProps
   ) {}
@@ -31,7 +34,7 @@ export class Task {
     this._props.id = id;
   }
 
-    setAssignedTo(assignedTo: number | null) {
+  setAssignedTo(assignedTo: number | null) {
     this._props.assignedTo = assignedTo;
   }
 

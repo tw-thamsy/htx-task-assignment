@@ -1,5 +1,5 @@
-import { randomInt } from 'node:crypto';
 import { Task, TaskStatus } from './task.entity.js';
+import { Skills } from '../skills/skills.constants.js';
 import { TaskRepository } from './task.repository.js';
 import { TaskTypeOrm } from './task.typeorm.js';
 import { queryRunner } from '../../../test/integration/setup.js';
@@ -18,6 +18,7 @@ describe('TaskRepository integration', () => {
       id: null,
       title: 'Create a task',
       status: TaskStatus.TODO,
+      skillsRequired: [],
       assignedTo: null,
     });
 
@@ -34,12 +35,14 @@ describe('TaskRepository integration', () => {
       id: null,
       title: 'First listed task',
       status: TaskStatus.TODO,
+      skillsRequired: [Skills.BACKEND, Skills.FRONTEND],
       assignedTo: null,
     }));
     const secondTask = await repository.createTask(Task.create({
       id: null,
       title: 'Second listed task',
       status: TaskStatus.IN_PROGRESS,
+      skillsRequired: [],
       assignedTo: null,
     }));
 
@@ -56,6 +59,7 @@ describe('TaskRepository integration', () => {
       id: null,
       title: 'Task found by id',
       status: TaskStatus.IN_PROGRESS,
+      skillsRequired: [],
       assignedTo: null,
     }));
 
@@ -75,6 +79,7 @@ describe('TaskRepository integration', () => {
       id: null,
       title: 'Task to be updated',
       status: TaskStatus.TODO,
+      skillsRequired: [],
       assignedTo: null,
     }));
 

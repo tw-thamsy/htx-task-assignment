@@ -16,7 +16,8 @@ export class TaskService {
     const newTask = Task.create({
         id: null,
         title: task.title,
-        status: task.status,
+        status: TaskStatus.TODO,
+        skillsRequired: task.skillsRequired ?? [],
         assignedTo: task.assignedTo,
       });
     return this.repo.createTask(newTask);

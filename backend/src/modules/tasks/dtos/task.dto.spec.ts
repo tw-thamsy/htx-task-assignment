@@ -1,6 +1,7 @@
 import { toTaskDto } from './task.dto.js';
 import { Task } from '../task.entity.js';
 import { TaskStatus } from '../task.entity.js';
+import { Skills } from '../../skills/skills.constants.js';
 
 describe('TaskDto Mapper', () => {
   it('should map a Task entity to a TaskDto correctly', () => {
@@ -9,6 +10,7 @@ describe('TaskDto Mapper', () => {
       id: 1,
       title: 'Test Task',
       status: TaskStatus.DONE,
+      skillsRequired: [Skills.BACKEND],
       assignedTo: null,
     });
 
@@ -19,5 +21,6 @@ describe('TaskDto Mapper', () => {
     expect(taskDto).toHaveProperty('title', task.props.title);
     expect(taskDto).toHaveProperty('status', task.props.status);
     expect(taskDto).toHaveProperty('assignedTo', task.props.assignedTo);
+    expect(taskDto).toHaveProperty('skillsRequired', task.props.skillsRequired);
   });
 });

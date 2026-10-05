@@ -25,7 +25,10 @@ $ npm run start:prod
 
 ```bash
 # unit tests
-$ npm run test
+$ npm run test:unit
+
+# integration tests (requires PostgreSQL settings in .env)
+$ npm run test:integration
 
 # e2e tests
 $ npm run test:e2e

@@ -40,9 +40,9 @@
       ```bash
       colima start
       ```
-    - Deploy Postgres
+    - Deploy Postgres and Migrate
       ```bash
-      docker compose -f ./deployments/local/docker-compose.yml up -d
+      make deploy_local_infra
       ```
 
 1. Run Backend

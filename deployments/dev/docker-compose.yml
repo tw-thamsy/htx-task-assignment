@@ -11,13 +11,33 @@ services:
       - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h localhost -U task_assignment_user -d task_assignment"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+  flyway:
+    image: flyway/flyway:10-alpine
+    platform: linux/amd64
+    command: migrate
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      FLYWAY_URL: jdbc:postgresql://postgres:5432/task_assignment
+      FLYWAY_USER: task_assignment_user
+      FLYWAY_PASSWORD: task_assignment_password
+    volumes:
+      - ../../backend/database/migrations:/flyway/sql:ro
   backend:
     container_name: htx-task-assignment-backend-dev
     image: htx-task-assignment-backend:latest
     ports:
       - "3001:3000"
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
   frontend:
     container_name: htx-task-assignment-frontend-dev
     image: htx-task-assignment-frontend:latest

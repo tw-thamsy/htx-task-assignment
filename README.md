@@ -50,3 +50,9 @@
    cd backend
    npm run start:dev
    ```
+
+1. Run Frontend
+   ```bash
+   cd frontend
+   npm run dev
+   ```

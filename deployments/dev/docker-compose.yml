@@ -35,6 +35,8 @@ services:
   backend:
     container_name: htx-task-assignment-backend-dev
     image: htx-task-assignment-backend:latest
+    env_file:
+      - .env.backend-dev
     ports:
       - "3001:3000"
     depends_on:

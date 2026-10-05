@@ -24,6 +24,14 @@
       brew install docker colima
       ```
 
+1. Install application dependencies
+  - Backend
+    ```bash
+    cd backend
+    npm install
+    cd -
+    ```
+
 
 ## Usage
 
@@ -36,3 +44,9 @@
       ```bash
       docker compose -f ./deployments/local/docker-compose.yml up -d
       ```
+
+1. Run Backend
+   ```bash
+   cd backend
+   npm run start:dev
+   ```

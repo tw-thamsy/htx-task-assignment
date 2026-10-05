@@ -27,8 +27,10 @@ services:
       FLYWAY_URL: jdbc:postgresql://postgres:5432/task_assignment
       FLYWAY_USER: task_assignment_user
       FLYWAY_PASSWORD: task_assignment_password
+      FLYWAY_LOCATIONS: filesystem:/flyway/sql,filesystem:/flyway/seed
     volumes:
       - ../../backend/database/migrations:/flyway/sql:ro
+      - ../../backend/database/seed:/flyway/seed:ro
 
 volumes:
   postgres_data:

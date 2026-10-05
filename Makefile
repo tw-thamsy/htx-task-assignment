@@ -9,7 +9,9 @@ build-frontend:
 build: build-backend build-frontend
 
 deploy_local_infra:
-	docker-compose -f deployments/local/docker-compose.yml up -d
+# Done separately so that error from flyway migrate shows
+	docker-compose -f deployments/local/docker-compose.yml up -d postgres
+	docker-compose -f deployments/local/docker-compose.yml run --rm flyway migrate 
 
 deploy_local_infra_down:
 	docker-compose -f deployments/local/docker-compose.yml down

@@ -28,8 +28,10 @@ services:
       FLYWAY_URL: jdbc:postgresql://postgres:5432/task_assignment
       FLYWAY_USER: task_assignment_user
       FLYWAY_PASSWORD: task_assignment_password
+      FLYWAY_LOCATIONS: filesystem:/flyway/sql,filesystem:/flyway/seed
     volumes:
       - ../../backend/database/migrations:/flyway/sql:ro
+      - ../../backend/database/seed:/flyway/seed:ro
   backend:
     container_name: htx-task-assignment-backend-dev
     image: htx-task-assignment-backend:latest
@@ -38,6 +40,8 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+      flyway:
+        condition: service_completed_successfully
   frontend:
     container_name: htx-task-assignment-frontend-dev
     image: htx-task-assignment-frontend:latest

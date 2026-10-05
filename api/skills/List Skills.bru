@@ -1,0 +1,17 @@
+meta {
+  name: List Skills
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{base_url}}/skills
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+  forwardAuthorizationHeader: false
+}

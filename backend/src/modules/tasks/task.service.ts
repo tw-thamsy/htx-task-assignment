@@ -1,6 +1,6 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { TaskRepository } from './task.repository.js';
-import { Task } from './task.entity.js';
+import { Task, TaskStatus } from './task.entity.js';
 import { CreateTaskDto } from './dtos/create-task.dto.js';
 
 @Injectable()
@@ -20,5 +20,29 @@ export class TaskService {
         assignedTo: task.assignedTo,
       });
     return this.repo.createTask(newTask);
+  }
+
+  async getAllTasks(): Promise<Task[]> {
+    return this.repo.getAllTasks();
+  }
+
+  async getTaskById(id: number): Promise<Task> {
+    const task = await this.repo.getTaskById(id);
+    if (!task) {
+      throw new NotFoundException(`Task ${id} not found`);
+    }
+    return task;
+  }
+
+  async updateTaskStatus(id: number, status: TaskStatus): Promise<Task> {
+    const task = await this.getTaskById(id);
+    task.updateStatus(status);
+    return this.repo.updateTask(task);
+  }
+
+  async assignTask(id: number, assignedTo: number): Promise<Task> {
+    const task = await this.getTaskById(id);
+    task.setAssignedTo(assignedTo);
+    return this.repo.updateTask(task);
   }
 }

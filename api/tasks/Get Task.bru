@@ -1,0 +1,21 @@
+meta {
+  name: Get Task
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{base_url}}/tasks/:task_id
+  body: none
+  auth: inherit
+}
+
+params:path {
+  task_id: 3
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+  forwardAuthorizationHeader: false
+}

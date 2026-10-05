@@ -1,0 +1,27 @@
+meta {
+  name: Assign Task
+  type: http
+  seq: 5
+}
+
+patch {
+  url: {{base_url}}/tasks/:task_id/assign
+  body: json
+  auth: inherit
+}
+
+params:path {
+  task_id: 3
+}
+
+body:json {
+  {
+    "assignedTo": 1
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+  forwardAuthorizationHeader: false
+}

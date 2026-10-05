@@ -20,10 +20,6 @@ export class Task {
     return new Task(props);
   }
 
-  setAssignedTo(assignedTo: number | null) {
-    this._props.assignedTo = assignedTo;
-  }
-
   get props(): TaskProps {
     return {...this._props};
   }
@@ -35,11 +31,12 @@ export class Task {
     this._props.id = id;
   }
 
+    setAssignedTo(assignedTo: number | null) {
+    this._props.assignedTo = assignedTo;
+  }
+
   updateStatus(status: TaskStatus) {
     this._props.status = status;
   }
 
-  updateTitle(title: string) {
-    this._props.title = title;
-  }
 }

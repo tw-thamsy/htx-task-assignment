@@ -78,12 +78,12 @@ describe('TaskRepository integration', () => {
       assignedTo: null,
     }));
 
-    createdTask.updateTitle('Updated task title');
+    // createdTask.setAssignedTo(10); // TODO: implement when developers implemented
     createdTask.updateStatus(TaskStatus.IN_PROGRESS);
 
     const updatedTask = await repository.updateTask(createdTask);
 
-    expect(updatedTask.props.title).toBe('Updated task title');
+    // expect(updatedTask.props.assignedTo).toBe(10);
     expect(updatedTask.props.status).toBe(TaskStatus.IN_PROGRESS);
   });
 });

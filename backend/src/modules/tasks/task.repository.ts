@@ -35,10 +35,8 @@ export class TaskRepository {
 
 export function toTaskOrm(task: Task): DeepPartial<TaskTypeOrm> {
   return {
+    ...task.props,
     id: task.props.id ?? undefined,
-    title: task.props.title,
-    status: task.props.status,
-    assignedTo: task.props.assignedTo,
   };
 }
 export function toTask(ormTask: TaskTypeOrm): Task {

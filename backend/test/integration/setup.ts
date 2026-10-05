@@ -3,6 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { afterAll, afterEach, beforeAll, beforeEach } from 'vitest';
 import { DataSource, QueryRunner } from 'typeorm';
 import { TaskTypeOrm } from '../../src/modules/tasks/task.typeorm.js';
+import { DeveloperTypeOrm } from '../../src/modules/developers/developer.typeorm.js';
 
 let dataSource: DataSource;
 export let queryRunner: QueryRunner;
@@ -17,7 +18,7 @@ beforeAll(async () => {
     username: config.getOrThrow<string>('DB_USER'),
     password: config.getOrThrow<string>('DB_PASSWORD'),
     database: config.getOrThrow<string>('DB_NAME'),
-    entities: [TaskTypeOrm],
+    entities: [TaskTypeOrm, DeveloperTypeOrm],
     synchronize: false,
     connectTimeoutMS: 5000,
   });

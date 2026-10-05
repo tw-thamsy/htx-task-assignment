@@ -1,0 +1,21 @@
+meta {
+  name: Get Developer
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{base_url}}/developers/:developer_id
+  body: none
+  auth: inherit
+}
+
+params:path {
+  developer_id: 1
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+  forwardAuthorizationHeader: false
+}

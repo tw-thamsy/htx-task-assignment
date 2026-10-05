@@ -1,0 +1,17 @@
+meta {
+  name: List Developers
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{base_url}}/developers
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+  forwardAuthorizationHeader: false
+}

@@ -26,6 +26,11 @@ export class TaskRepository {
     const task = await this.tasks.findOneBy({ id });
     return task ? toTask(task) : null;
   }
+
+  async updateTask(task: Task): Promise<Task> {
+    await this.tasks.update({ id: task.props.id! }, toTaskOrm(task));
+    return task;
+  }
 }
 
 export function toTaskOrm(task: Task): DeepPartial<TaskTypeOrm> {

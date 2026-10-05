@@ -23,4 +23,26 @@ describe('Task Entity', () => {
     });
     expect(() => task.setId(2)).toThrow('ID is already set');
   });
+
+  it('should update the title of a task', () => {
+    const task = Task.create({
+      id: null,
+      title: 'Initial Title',
+      status: TaskStatus.TODO,
+      assignedTo: null,
+    });
+    task.updateTitle('Updated Title');
+    expect(task.props.title).toBe('Updated Title');
+  });
+
+  it('should update the status of a task', () => {
+    const task = Task.create({
+      id: null,
+      title: 'Initial Title',
+      status: TaskStatus.TODO,
+      assignedTo: null,
+    });
+    task.updateStatus(TaskStatus.IN_PROGRESS);
+    expect(task.props.status).toBe(TaskStatus.IN_PROGRESS);
+  });
 });

@@ -69,4 +69,21 @@ describe('TaskRepository integration', () => {
 
     expect(task).toBeNull();
   });
+
+  it('should update a task', async () => {
+    const createdTask = await repository.createTask(Task.create({
+      id: null,
+      title: 'Task to be updated',
+      status: TaskStatus.TODO,
+      assignedTo: null,
+    }));
+
+    createdTask.updateTitle('Updated task title');
+    createdTask.updateStatus(TaskStatus.IN_PROGRESS);
+
+    const updatedTask = await repository.updateTask(createdTask);
+
+    expect(updatedTask.props.title).toBe('Updated task title');
+    expect(updatedTask.props.status).toBe(TaskStatus.IN_PROGRESS);
+  });
 });

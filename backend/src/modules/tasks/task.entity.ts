@@ -34,4 +34,12 @@ export class Task {
     }
     this._props.id = id;
   }
+
+  updateStatus(status: TaskStatus) {
+    this._props.status = status;
+  }
+
+  updateTitle(title: string) {
+    this._props.title = title;
+  }
 }

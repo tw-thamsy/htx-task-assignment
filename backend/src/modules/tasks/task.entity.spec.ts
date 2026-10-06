@@ -1,6 +1,7 @@
 import { Skills } from '#shared/skills.constants';
+import { TaskStatus } from '#shared/task-status.constants';
 
-import { Task, TaskStatus } from './task.entity.js';
+import { Task } from './task.entity.js';
 
 describe('Task Entity', () => {
   it('should create a task with the correct properties', () => {

@@ -1,7 +1,9 @@
 import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
 
-import { DeveloperService } from './developer.service.js';
-import { DeveloperDto, toDeveloperDto } from './dtos/developer.dto.js';
+import type { DeveloperDto } from '#shared/dtos/developers/developer.dto';
+
+import { DeveloperService } from '../developer.service.js';
+import { toDeveloperDto } from './mapper/developer.mapper.js';
 
 @Controller('developers')
 export class DeveloperController {

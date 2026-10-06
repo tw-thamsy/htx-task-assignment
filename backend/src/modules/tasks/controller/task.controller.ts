@@ -1,17 +1,19 @@
 import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 
-import { AssignTaskDto } from './dtos/assign-task.dto.js';
-import { CreateTaskDto } from './dtos/create-task.dto.js';
-import { TaskDto, toTaskDto } from './dtos/task.dto.js';
-import { UpdateTaskStatusDto } from './dtos/update-task-status.dto.js';
-import { TaskService } from './task.service.js';
+import type { TaskDto } from '#shared/dtos/tasks/task.dto';
+
+import { TaskService } from '../task.service.js';
+import { toTaskDto } from './mapper/task.mapper.js';
+import { AssignTaskValidationDto } from './validation/assign-task.validation.dto.js';
+import { CreateTaskValidationDto } from './validation/create-task.validation.dto.js';
+import { UpdateTaskStatusValidationDto } from './validation/update-task-status.validation.dto.js';
 
 @Controller('tasks')
 export class TaskController {
   constructor(private readonly taskService: TaskService) {}
 
   @Post()
-  async createTask(@Body() task: CreateTaskDto): Promise<TaskDto> {
+  async createTask(@Body() task: CreateTaskValidationDto): Promise<TaskDto> {
     const createdTask = await this.taskService.createTask(task);
     return toTaskDto(createdTask);
   }
@@ -31,7 +33,7 @@ export class TaskController {
   @Patch(':id/status')
   async updateTaskStatus(
     @Param('id', ParseIntPipe) id: number,
-    @Body() body: UpdateTaskStatusDto,
+    @Body() body: UpdateTaskStatusValidationDto,
   ): Promise<TaskDto> {
     const task = await this.taskService.updateTaskStatus(id, body.status);
     return toTaskDto(task);
@@ -40,7 +42,7 @@ export class TaskController {
   @Patch(':id/assign')
   async assignTask(
     @Param('id', ParseIntPipe) id: number,
-    @Body() body: AssignTaskDto,
+    @Body() body: AssignTaskValidationDto,
   ): Promise<TaskDto> {
     const task = await this.taskService.assignTask(id, body.assignedTo);
     return toTaskDto(task);

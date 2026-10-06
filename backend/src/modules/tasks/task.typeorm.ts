@@ -1,8 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 import { Skills } from '#shared/skills.constants';
-
-import { TaskStatus } from './task.entity.js';
+import { TaskStatus } from '#shared/task-status.constants';
 
 @Entity('tasks')
 export class TaskTypeOrm {

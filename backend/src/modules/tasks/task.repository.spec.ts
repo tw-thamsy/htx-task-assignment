@@ -1,6 +1,7 @@
 import { Skills } from '#shared/skills.constants';
+import { TaskStatus } from '#shared/task-status.constants';
 
-import { Task, TaskStatus } from './task.entity.js';
+import { Task } from './task.entity.js';
 import { toTaskOrm, toTask } from './task.repository.js';
 import { TaskTypeOrm } from './task.typeorm.js';
 

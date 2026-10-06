@@ -1,10 +1,7 @@
 import { Skills } from '#shared/skills.constants';
+import { TaskStatus } from '#shared/task-status.constants';
 
-export enum TaskStatus {
-  TODO = 'todo',
-  IN_PROGRESS = 'in_progress',
-  DONE = 'done',
-}
+export { TaskStatus } from '#shared/task-status.constants';
 
 type TaskProps = {
   id: number | null;

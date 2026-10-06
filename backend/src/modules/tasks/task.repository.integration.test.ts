@@ -1,7 +1,8 @@
 import { Skills } from '#shared/skills.constants';
+import { TaskStatus } from '#shared/task-status.constants';
 
 import { queryRunner } from '../../../test/integration/setup.js';
-import { Task, TaskStatus } from './task.entity.js';
+import { Task } from './task.entity.js';
 import { TaskRepository } from './task.repository.js';
 import { TaskTypeOrm } from './task.typeorm.js';
 

@@ -1,12 +1,12 @@
-.PHONY: build-backend build-frontend build deploy_dev deploy_dev_down migrate_local migrate_dev test
+.PHONY: build_backend build_frontend build deploy_dev deploy_dev_down migrate_local migrate_dev test
 
-build-backend:
+build_backend:
 	docker build -t htx-task-assignment-backend -f build/backend/Dockerfile .
 
-build-frontend:
+build_frontend:
 	docker build -t htx-task-assignment-frontend -f build/frontend/Dockerfile .
 
-build: build-backend build-frontend
+build: build_backend build_frontend
 
 deploy_local_infra:
 # Done separately so that error from flyway migrate shows

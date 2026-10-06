@@ -1,5 +1,4 @@
-import { Transform } from 'class-transformer';
-import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, Min } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator';
 
 import type { CreateTaskDto } from '#shared/dtos/tasks/create-task.dto';
 import { Skills } from '#shared/skills.constants';

@@ -25,11 +25,21 @@
       ```
 
 1. Install application dependencies
+  - Tools for whole repo (linters)
+    ```bash
+    npm ci
+    ```
   - Backend
     ```bash
     cd backend
     cp .env.local .env
-    npm install
+    npm ci
+    cd -
+    ```
+  - Frontend
+    ```bash
+    cd frontend
+    npm ci
     cd -
     ```
 

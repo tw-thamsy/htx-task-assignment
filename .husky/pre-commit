@@ -1,0 +1,9 @@
+cd backend
+npm run lint
+npm run fmt:check
+cd -
+
+cd frontend
+npm run lint
+npm run fmt:check
+cd -

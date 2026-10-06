@@ -37,6 +37,8 @@ services:
     image: htx-task-assignment-backend:latest
     env_file:
       - .env.backend-dev
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
     ports:
       - '3001:3000'
     depends_on:

@@ -6,6 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
+import StatusSelect from './StatusSelect';
 import useGetTasks from './useGetTasks';
 
 export default function TaskTable() {
@@ -25,9 +26,9 @@ export default function TaskTable() {
         <TableHead>
           <TableRow>
             <TableCell>Task Title</TableCell>
-            <TableCell align="right">Skills</TableCell>
-            <TableCell align="right">Status</TableCell>
-            <TableCell align="right">Assignee</TableCell>
+            <TableCell>Skills</TableCell>
+            <TableCell>Status</TableCell>
+            <TableCell>Assignee</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -36,9 +37,11 @@ export default function TaskTable() {
               <TableCell component="th" scope="row">
                 {task.title}
               </TableCell>
-              <TableCell align="right">{task.skillsRequired.join(', ')}</TableCell>
-              <TableCell align="right">{task.status}</TableCell>
-              <TableCell align="right">{task.assignedTo ?? 'Unassigned'}</TableCell>
+              <TableCell>{task.skillsRequired.join(', ')}</TableCell>
+              <TableCell>
+                <StatusSelect taskId={task.id} value={task.status} />
+              </TableCell>
+              <TableCell>{task.assignedTo ?? 'Unassigned'}</TableCell>
             </TableRow>
           ))}
           {tasks.length === 0 && (

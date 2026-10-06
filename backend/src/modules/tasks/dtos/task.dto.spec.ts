@@ -1,4 +1,5 @@
-import { Skills } from '../../skills/skills.constants.js';
+import { Skills } from '#shared/skills.constants';
+
 import { Task } from '../task.entity.js';
 import { TaskStatus } from '../task.entity.js';
 import { toTaskDto } from './task.dto.js';

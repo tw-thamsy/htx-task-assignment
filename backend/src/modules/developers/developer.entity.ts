@@ -1,4 +1,4 @@
-import { Skills } from '../skills/skills.constants.js';
+import { Skills } from '#shared/skills.constants';
 
 type DeveloperProps = {
   id: number | null;

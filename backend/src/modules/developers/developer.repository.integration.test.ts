@@ -1,5 +1,6 @@
+import { Skills } from '#shared/skills.constants';
+
 import { queryRunner } from '../../../test/integration/setup.js';
-import { Skills } from '../skills/skills.constants.js';
 import { Developer } from './developer.entity.js';
 import { DeveloperRepository } from './developer.repository.js';
 import { DeveloperTypeOrm } from './developer.typeorm.js';

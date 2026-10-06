@@ -1,4 +1,5 @@
-import { Skills } from '../../skills/skills.constants.js';
+import { Skills } from '#shared/skills.constants';
+
 import { Developer } from '../developer.entity.js';
 
 export class DeveloperDto {

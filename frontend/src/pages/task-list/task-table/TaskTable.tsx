@@ -6,16 +6,18 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
-function createData(id: number, title: string, skills: string, status: string, assignee: string) {
+import { Skills } from '#shared/skills.constants';
+
+function createData(id: number, title: string, skills: Skills[], status: string, assignee: string) {
   return { id, title, skills, status, assignee };
 }
 
 const rows = [
-  createData(1, 'Task 1', 'React, TypeScript', 'In Progress', 'Alice'),
-  createData(2, 'Task 2', 'Node.js, Express', 'Completed', 'Bob'),
-  createData(3, 'Task 3', 'Python, Django', 'Pending', 'Charlie'),
-  createData(4, 'Task 4', 'Java, Spring', 'In Progress', 'David'),
-  createData(5, 'Task 5', 'C#, .NET', 'Completed', 'Eve'),
+  createData(1, 'Task 1', [Skills.BACKEND, Skills.FRONTEND], 'In Progress', 'Alice'),
+  createData(2, 'Task 2', [Skills.BACKEND], 'Completed', 'Bob'),
+  createData(3, 'Task 3', [Skills.FRONTEND], 'Pending', 'Charlie'),
+  createData(4, 'Task 4', [], 'In Progress', 'David'),
+  createData(5, 'Task 5', [Skills.FRONTEND], 'Completed', 'Eve'),
 ];
 
 export default function TaskTable() {
@@ -36,7 +38,7 @@ export default function TaskTable() {
               <TableCell component="th" scope="row">
                 {row.title}
               </TableCell>
-              <TableCell align="right">{row.skills}</TableCell>
+              <TableCell align="right">{row.skills.join(', ')}</TableCell>
               <TableCell align="right">{row.status}</TableCell>
               <TableCell align="right">{row.assignee}</TableCell>
             </TableRow>

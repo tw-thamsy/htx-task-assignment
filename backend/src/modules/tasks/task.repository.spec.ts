@@ -1,4 +1,5 @@
-import { Skills } from '../skills/skills.constants.js';
+import { Skills } from '#shared/skills.constants';
+
 import { Task, TaskStatus } from './task.entity.js';
 import { toTaskOrm, toTask } from './task.repository.js';
 import { TaskTypeOrm } from './task.typeorm.js';

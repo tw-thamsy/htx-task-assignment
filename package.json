@@ -6,6 +6,10 @@
     "oxlint-tsgolint": "^7.0.2003"
   },
   "scripts": {
-    "prepare": "husky"
+    "prepare": "husky",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix"
   }
 }

@@ -2,6 +2,6 @@
   "singleQuote": true,
   "trailingComma": "all",
   "sortPackageJson": false,
-  "ignorePatterns": [],
+  "ignorePatterns": ["api/**"],
   "sortImports": true
 }

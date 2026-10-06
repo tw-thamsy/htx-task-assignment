@@ -3,6 +3,7 @@
 This application uses bruno for its API client and documentation.
 
 1. Install `bruno`
+
    ```bash
    brew install bruno
    ```

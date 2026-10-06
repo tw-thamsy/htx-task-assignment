@@ -1,4 +1,4 @@
-.PHONY: build_backend build_frontend build deploy_dev deploy_dev_down migrate_local migrate_dev test
+.PHONY: build_backend build_frontend build deploy_dev deploy_dev_down migrate_local migrate_dev test lint lint-check
 
 build_backend:
 	docker build -t htx-task-assignment-backend -f build/backend/Dockerfile .
@@ -33,3 +33,12 @@ migrate_dev:
 ## test
 test:
 	cd backend && npm test
+
+## Lint
+lint:
+	npm run fmt
+	npm run lint:fix
+
+lint-check:
+	npm run fmt:check
+	npm run lint

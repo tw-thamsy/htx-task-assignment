@@ -13,10 +13,4 @@ export class CreateTaskValidationDto implements CreateTaskDto {
   @IsOptional()
   @IsEnum(Skills, { each: true })
   skillsRequired?: Skills[];
-
-  @IsOptional()
-  @IsInt()
-  @Min(1)
-  @Transform(({ value }) => (value === undefined ? null : Number(value)))
-  assignedTo: number | null;
 }

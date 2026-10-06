@@ -1,3 +1,4 @@
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 
 import './App.css';
@@ -19,6 +20,16 @@ const router = createBrowserRouter([
   },
 ]);
 
+const theme = createTheme({
+  colorSchemes: {
+    dark: true,
+  },
+});
+
 export default function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <ThemeProvider theme={theme}>
+      <RouterProvider router={router} />
+    </ThemeProvider>
+  );
 }

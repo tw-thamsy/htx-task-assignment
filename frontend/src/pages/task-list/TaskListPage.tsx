@@ -1,3 +1,10 @@
+import TaskTable from './task-table/TaskTable';
+
 export default function TaskListPage() {
-  return <div>Task List Page</div>;
+  return (
+    <div>
+      <h1>Tasks</h1>
+      <TaskTable />
+    </div>
+  );
 }

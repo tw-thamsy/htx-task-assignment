@@ -1,5 +1,8 @@
 import type { Preview } from '@storybook/react-vite';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { sb } from 'storybook/test';
+
+sb.mock('../src/api/tasks.ts', { spy: true });
 
 const preview: Preview = {
   parameters: {

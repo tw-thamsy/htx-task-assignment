@@ -1,16 +1,14 @@
-import { Task, TaskStatus } from './task.entity.js';
+import { queryRunner } from '../../../test/integration/setup.js';
 import { Skills } from '../skills/skills.constants.js';
+import { Task, TaskStatus } from './task.entity.js';
 import { TaskRepository } from './task.repository.js';
 import { TaskTypeOrm } from './task.typeorm.js';
-import { queryRunner } from '../../../test/integration/setup.js';
 
 describe('TaskRepository integration', () => {
   let repository: TaskRepository;
 
   beforeEach(() => {
-    repository = new TaskRepository(
-      queryRunner.manager.getRepository(TaskTypeOrm),
-    );
+    repository = new TaskRepository(queryRunner.manager.getRepository(TaskTypeOrm));
   });
 
   it('should create task with id', async () => {
@@ -31,37 +29,45 @@ describe('TaskRepository integration', () => {
   });
 
   it('should list all tasks', async () => {
-    const firstTask = await repository.createTask(Task.create({
-      id: null,
-      title: 'First listed task',
-      status: TaskStatus.TODO,
-      skillsRequired: [Skills.BACKEND, Skills.FRONTEND],
-      assignedTo: null,
-    }));
-    const secondTask = await repository.createTask(Task.create({
-      id: null,
-      title: 'Second listed task',
-      status: TaskStatus.IN_PROGRESS,
-      skillsRequired: [],
-      assignedTo: null,
-    }));
+    const firstTask = await repository.createTask(
+      Task.create({
+        id: null,
+        title: 'First listed task',
+        status: TaskStatus.TODO,
+        skillsRequired: [Skills.BACKEND, Skills.FRONTEND],
+        assignedTo: null,
+      }),
+    );
+    const secondTask = await repository.createTask(
+      Task.create({
+        id: null,
+        title: 'Second listed task',
+        status: TaskStatus.IN_PROGRESS,
+        skillsRequired: [],
+        assignedTo: null,
+      }),
+    );
 
     const tasks = await repository.getAllTasks();
 
     expect(tasks.map((task) => task.props.id)).toEqual(
       expect.arrayContaining([firstTask.props.id, secondTask.props.id]),
     );
-    expect(tasks.find(task => task.props.id === firstTask.props.id)?.props).toStrictEqual(firstTask.props);
+    expect(tasks.find((task) => task.props.id === firstTask.props.id)?.props).toStrictEqual(
+      firstTask.props,
+    );
   });
 
   it('should get a task by id', async () => {
-    const createdTask = await repository.createTask(Task.create({
-      id: null,
-      title: 'Task found by id',
-      status: TaskStatus.IN_PROGRESS,
-      skillsRequired: [],
-      assignedTo: null,
-    }));
+    const createdTask = await repository.createTask(
+      Task.create({
+        id: null,
+        title: 'Task found by id',
+        status: TaskStatus.IN_PROGRESS,
+        skillsRequired: [],
+        assignedTo: null,
+      }),
+    );
 
     const task = await repository.getTaskById(createdTask.props.id!);
 
@@ -75,13 +81,15 @@ describe('TaskRepository integration', () => {
   });
 
   it('should update a task', async () => {
-    const createdTask = await repository.createTask(Task.create({
-      id: null,
-      title: 'Task to be updated',
-      status: TaskStatus.TODO,
-      skillsRequired: [],
-      assignedTo: null,
-    }));
+    const createdTask = await repository.createTask(
+      Task.create({
+        id: null,
+        title: 'Task to be updated',
+        status: TaskStatus.TODO,
+        skillsRequired: [],
+        assignedTo: null,
+      }),
+    );
 
     // createdTask.setAssignedTo(10); // TODO: implement when developers implemented
     createdTask.updateStatus(TaskStatus.IN_PROGRESS);

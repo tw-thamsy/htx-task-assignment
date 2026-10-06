@@ -1,17 +1,19 @@
-import { Skills } from "../skills/skills.constants.js";
-import { Task, TaskStatus } from "./task.entity.js";
-import { toTaskOrm, toTask } from "./task.repository.js";
-import { TaskTypeOrm } from "./task.typeorm.js";
+import { Skills } from '../skills/skills.constants.js';
+import { Task, TaskStatus } from './task.entity.js';
+import { toTaskOrm, toTask } from './task.repository.js';
+import { TaskTypeOrm } from './task.typeorm.js';
 
 describe('Task Repository Mappers', () => {
   it('should map a Task entity to a TaskTypeOrm correctly', () => {
-    const ormTask = toTaskOrm(Task.create({
-      id: null,
-      title: 'Test Task',
-      status: TaskStatus.IN_PROGRESS,
-      skillsRequired: [Skills.BACKEND],
-      assignedTo: null,
-    }));
+    const ormTask = toTaskOrm(
+      Task.create({
+        id: null,
+        title: 'Test Task',
+        status: TaskStatus.IN_PROGRESS,
+        skillsRequired: [Skills.BACKEND],
+        assignedTo: null,
+      }),
+    );
     expect(ormTask.id).toBeUndefined();
     expect(ormTask.title).toBe('Test Task');
     expect(ormTask.status).toBe(TaskStatus.IN_PROGRESS);

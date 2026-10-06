@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, DeepPartial } from 'typeorm';
+
 import { Task } from './task.entity.js';
 import { TaskTypeOrm } from './task.typeorm.js';
 
@@ -41,10 +42,10 @@ export function toTaskOrm(task: Task): DeepPartial<TaskTypeOrm> {
 }
 export function toTask(ormTask: TaskTypeOrm): Task {
   return Task.create({
-   id: ormTask.id,
-   title: ormTask.title,
-   status: ormTask.status,
-   skillsRequired: ormTask.skillsRequired,
-   assignedTo: ormTask.assignedTo,
+    id: ormTask.id,
+    title: ormTask.title,
+    status: ormTask.status,
+    skillsRequired: ormTask.skillsRequired,
+    assignedTo: ormTask.assignedTo,
   });
 }

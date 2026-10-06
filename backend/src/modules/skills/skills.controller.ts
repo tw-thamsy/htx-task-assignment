@@ -1,4 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
+
 import { Skills } from './skills.constants.js';
 
 @Controller('skills')

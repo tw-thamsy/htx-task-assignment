@@ -22,9 +22,10 @@
       "sshPassword": ""
     }
   ],
+  "oxc.path.oxfmt": "node_modules/oxfmt/dist/cli.js",
+  "oxc.path.oxlint": "node_modules/oxlint/dist/cli.js",
   "editor.codeActionsOnSave": {
     "source.fixAll.oxc": "always"
   },
-  "editor.defaultFormatter": "oxc.oxc-vscode",
-  "editor.formatOnSave": false
+  "editor.defaultFormatter": "oxc.oxc-vscode"
 }

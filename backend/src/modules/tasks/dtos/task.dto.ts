@@ -1,4 +1,4 @@
-import { Task, TaskStatus } from "../task.entity.js";
+import { Task, TaskStatus } from '../task.entity.js';
 
 export class TaskDto {
   id!: number;

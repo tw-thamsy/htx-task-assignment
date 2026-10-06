@@ -1,5 +1,5 @@
-import { Task, TaskStatus } from './task.entity.js';
 import { Skills } from '../skills/skills.constants.js';
+import { Task, TaskStatus } from './task.entity.js';
 
 describe('Task Entity', () => {
   it('should create a task with the correct properties', () => {
@@ -39,7 +39,7 @@ describe('Task Entity', () => {
     task.updateStatus(TaskStatus.IN_PROGRESS);
     expect(task.props.status).toBe(TaskStatus.IN_PROGRESS);
   });
-  
+
   it('should set the assignedTo property of a task', () => {
     const task = Task.create({
       id: null,

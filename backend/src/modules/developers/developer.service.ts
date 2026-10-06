@@ -1,6 +1,7 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { DeveloperRepository } from './developer.repository.js';
+
 import { Developer } from './developer.entity.js';
+import { DeveloperRepository } from './developer.repository.js';
 
 @Injectable()
 export class DeveloperService {

@@ -1,4 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+
 import { Skills } from '../skills/skills.constants.js';
 
 @Entity('developers')

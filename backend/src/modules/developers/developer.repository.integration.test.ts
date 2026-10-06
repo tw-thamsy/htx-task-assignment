@@ -1,8 +1,8 @@
+import { queryRunner } from '../../../test/integration/setup.js';
+import { Skills } from '../skills/skills.constants.js';
 import { Developer } from './developer.entity.js';
 import { DeveloperRepository } from './developer.repository.js';
 import { DeveloperTypeOrm } from './developer.typeorm.js';
-import { Skills } from '../skills/skills.constants.js';
-import { queryRunner } from '../../../test/integration/setup.js';
 
 describe('DeveloperRepository integration', () => {
   let repository: DeveloperRepository;
@@ -11,9 +11,7 @@ describe('DeveloperRepository integration', () => {
     await queryRunner.query(
       'CREATE TEMP TABLE developers (LIKE public.developers INCLUDING ALL) ON COMMIT DROP',
     );
-    repository = new DeveloperRepository(
-      queryRunner.manager.getRepository(DeveloperTypeOrm),
-    );
+    repository = new DeveloperRepository(queryRunner.manager.getRepository(DeveloperTypeOrm));
   });
 
   it('should create a developer with a numeric id and persist skills', async () => {
@@ -34,16 +32,20 @@ describe('DeveloperRepository integration', () => {
   });
 
   it('should list all developers', async () => {
-    const firstDeveloper = await repository.createDeveloper(Developer.create({
-      id: null,
-      name: 'First listed developer',
-      skills: [Skills.BACKEND],
-    }));
-    const secondDeveloper = await repository.createDeveloper(Developer.create({
-      id: null,
-      name: 'Second listed developer',
-      skills: [Skills.FRONTEND],
-    }));
+    const firstDeveloper = await repository.createDeveloper(
+      Developer.create({
+        id: null,
+        name: 'First listed developer',
+        skills: [Skills.BACKEND],
+      }),
+    );
+    const secondDeveloper = await repository.createDeveloper(
+      Developer.create({
+        id: null,
+        name: 'Second listed developer',
+        skills: [Skills.FRONTEND],
+      }),
+    );
 
     const developers = await repository.getAllDevelopers();
 
@@ -53,11 +55,13 @@ describe('DeveloperRepository integration', () => {
   });
 
   it('should get a developer by id with empty skills', async () => {
-    const createdDeveloper = await repository.createDeveloper(Developer.create({
-      id: null,
-      name: 'Developer found by id',
-      skills: [],
-    }));
+    const createdDeveloper = await repository.createDeveloper(
+      Developer.create({
+        id: null,
+        name: 'Developer found by id',
+        skills: [],
+      }),
+    );
 
     const developer = await repository.getDeveloperById(createdDeveloper.props.id!);
 

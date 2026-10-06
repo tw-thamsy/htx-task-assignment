@@ -1,7 +1,3 @@
 export default function TaskCreationPage() {
-  return (
-    <div>
-      Task Creation Page
-    </div>
-  );
+  return <div>Task Creation Page</div>;
 }

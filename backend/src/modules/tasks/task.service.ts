@@ -1,11 +1,11 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { TaskRepository } from './task.repository.js';
-import { Task, TaskStatus } from './task.entity.js';
+
 import { CreateTaskDto } from './dtos/create-task.dto.js';
+import { Task, TaskStatus } from './task.entity.js';
+import { TaskRepository } from './task.repository.js';
 
 @Injectable()
 export class TaskService {
-
   constructor(
     @Inject()
     private readonly repo: TaskRepository,
@@ -14,12 +14,12 @@ export class TaskService {
   async createTask(task: CreateTaskDto): Promise<Task> {
     // TODO: check if user has skills to be assigned to the task
     const newTask = Task.create({
-        id: null,
-        title: task.title,
-        status: TaskStatus.TODO,
-        skillsRequired: task.skillsRequired ?? [],
-        assignedTo: task.assignedTo,
-      });
+      id: null,
+      title: task.title,
+      status: TaskStatus.TODO,
+      skillsRequired: task.skillsRequired ?? [],
+      assignedTo: task.assignedTo,
+    });
     return this.repo.createTask(newTask);
   }
 

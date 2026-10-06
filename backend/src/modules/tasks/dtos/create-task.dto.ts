@@ -1,9 +1,9 @@
-import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, Min } from 'class-validator';
 import { Transform } from 'class-transformer';
+import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, Min } from 'class-validator';
+
 import { Skills } from '../../skills/skills.constants.js';
 
 export class CreateTaskDto {
-
   @IsString()
   @IsNotEmpty()
   @MaxLength(255)

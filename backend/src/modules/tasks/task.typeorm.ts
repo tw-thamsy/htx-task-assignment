@@ -1,6 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { TaskStatus } from './task.entity.js';
+
 import { Skills } from '../skills/skills.constants.js';
+import { TaskStatus } from './task.entity.js';
 
 @Entity('tasks')
 export class TaskTypeOrm {
@@ -14,7 +15,7 @@ export class TaskTypeOrm {
   readonly status: TaskStatus;
 
   @Column({ name: 'skills_required', type: 'jsonb', default: () => "'[]'::jsonb" })
-    readonly skillsRequired: Skills[];
+  readonly skillsRequired: Skills[];
 
   @Column({ name: 'assigned_to', type: 'bigint', nullable: true })
   readonly assignedTo: number | null;

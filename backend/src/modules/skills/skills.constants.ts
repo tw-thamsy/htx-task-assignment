@@ -1,4 +1,4 @@
 export enum Skills {
-  BACKEND = "backend",
-  FRONTEND = "frontend"
+  BACKEND = 'backend',
+  FRONTEND = 'frontend',
 }

@@ -14,17 +14,15 @@ type TaskProps = {
   assignedTo: number | null;
 };
 
-  export class Task {
-  private constructor(
-    private _props: TaskProps
-  ) {}
+export class Task {
+  private constructor(private _props: TaskProps) {}
 
   static create(props: TaskProps): Task {
     return new Task(props);
   }
 
   get props(): TaskProps {
-    return {...this._props};
+    return { ...this._props };
   }
 
   setId(id: number) {
@@ -41,5 +39,4 @@ type TaskProps = {
   updateStatus(status: TaskStatus) {
     this._props.status = status;
   }
-
 }

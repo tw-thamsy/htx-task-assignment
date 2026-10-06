@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TasksModule } from './modules/tasks/tasks.module.js';
+
 import { DevelopersModule } from './modules/developers/developers.module.js';
 import { SkillsModule } from './modules/skills/skills.module.js';
+import { TasksModule } from './modules/tasks/tasks.module.js';
 
 @Module({
   imports: [

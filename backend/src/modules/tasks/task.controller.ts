@@ -1,9 +1,10 @@
 import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
-import { TaskService } from './task.service.js';
+
+import { AssignTaskDto } from './dtos/assign-task.dto.js';
 import { CreateTaskDto } from './dtos/create-task.dto.js';
 import { TaskDto, toTaskDto } from './dtos/task.dto.js';
 import { UpdateTaskStatusDto } from './dtos/update-task-status.dto.js';
-import { AssignTaskDto } from './dtos/assign-task.dto.js';
+import { TaskService } from './task.service.js';
 
 @Controller('tasks')
 export class TaskController {

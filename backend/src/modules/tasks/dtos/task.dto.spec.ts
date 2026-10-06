@@ -1,7 +1,7 @@
-import { toTaskDto } from './task.dto.js';
+import { Skills } from '../../skills/skills.constants.js';
 import { Task } from '../task.entity.js';
 import { TaskStatus } from '../task.entity.js';
-import { Skills } from '../../skills/skills.constants.js';
+import { toTaskDto } from './task.dto.js';
 
 describe('TaskDto Mapper', () => {
   it('should map a Task entity to a TaskDto correctly', () => {
@@ -13,7 +13,6 @@ describe('TaskDto Mapper', () => {
       skillsRequired: [Skills.BACKEND],
       assignedTo: null,
     });
-
 
     const taskDto = toTaskDto(task);
 

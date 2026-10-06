@@ -26,3 +26,18 @@ export async function updateTaskStatus(taskId: number, status: TaskStatus): Prom
     throw new Error(`Failed to update task status (${response.status})`);
   }
 }
+
+export async function assignTask(taskId: number, developerId: number | null): Promise<void> {
+  const { apiUrl } = window.APP_CONFIG;
+  const response = await fetch(`${apiUrl.replace(/\/$/, '')}/tasks/${taskId}/assign`, {
+    method: 'PATCH',
+    body: JSON.stringify({ assignedTo: developerId }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to assign task (${response.status})`);
+  }
+}

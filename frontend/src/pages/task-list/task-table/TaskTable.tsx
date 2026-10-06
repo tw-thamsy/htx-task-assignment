@@ -6,6 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
+import AssigneeSelect from './AssigneeSelect';
 import StatusSelect from './StatusSelect';
 import useGetTasks from './useGetTasks';
 
@@ -41,7 +42,9 @@ export default function TaskTable() {
               <TableCell>
                 <StatusSelect taskId={task.id} value={task.status} />
               </TableCell>
-              <TableCell>{task.assignedTo ? task.assignedTo.name : 'Unassigned'}</TableCell>
+              <TableCell>
+                <AssigneeSelect taskId={task.id} value={task.assignedTo ?? null} />
+              </TableCell>
             </TableRow>
           ))}
           {tasks.length === 0 && (

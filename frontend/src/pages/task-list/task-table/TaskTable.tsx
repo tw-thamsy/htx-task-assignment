@@ -5,13 +5,22 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import { useQuery } from '@tanstack/react-query';
 
+import { fetchTasks } from '../../../api/tasks';
 import AssigneeSelect from './AssigneeSelect';
 import StatusSelect from './StatusSelect';
-import useGetTasks from './useGetTasks';
 
 export default function TaskTable() {
-  const { data: tasks = [], isPending, isError, error } = useGetTasks();
+  const {
+    data: tasks = [],
+    isPending,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ['tasks'],
+    queryFn: fetchTasks,
+  });
 
   if (isPending) {
     return <p>Loading tasks...</p>;

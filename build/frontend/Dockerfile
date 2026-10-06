@@ -14,4 +14,4 @@ COPY --from=build /app/frontend/dist /usr/share/nginx/html
 COPY build/frontend/nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["/bin/sh", "-c", "printf '{\"apiUrl\":\"%s\"}\\n' \"${API_URL:-http://localhost:3000}\" > /usr/share/nginx/html/config.json && exec nginx -g 'daemon off;'"]

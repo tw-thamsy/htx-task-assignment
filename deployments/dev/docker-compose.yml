@@ -47,6 +47,8 @@ services:
   frontend:
     container_name: htx-task-assignment-frontend-dev
     image: htx-task-assignment-frontend:latest
+    env_file:
+      - .env.frontend-dev
     ports:
       - '81:80'
     depends_on:

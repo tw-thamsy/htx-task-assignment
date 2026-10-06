@@ -35,7 +35,7 @@
 - Backend
   ```bash
   cd backend
-  cp .env.local .env
+  cp .env.example .env
   npm ci
   cd -
   ```

@@ -41,7 +41,7 @@ export default function TaskTable() {
               <TableCell>
                 <StatusSelect taskId={task.id} value={task.status} />
               </TableCell>
-              <TableCell>{task.assignedTo ?? 'Unassigned'}</TableCell>
+              <TableCell>{task.assignedTo ? task.assignedTo.name : 'Unassigned'}</TableCell>
             </TableRow>
           ))}
           {tasks.length === 0 && (

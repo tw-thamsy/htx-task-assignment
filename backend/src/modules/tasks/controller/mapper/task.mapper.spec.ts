@@ -1,6 +1,7 @@
 import { Skills } from '#shared/skills.constants';
 import { TaskStatus } from '#shared/task-status.constants';
 
+import { Developer } from '../../../developers/developer.entity.js';
 import { Task } from '../../task.entity.js';
 import { toTaskDto } from './task.mapper.js';
 
@@ -14,12 +15,18 @@ describe('Task Mapper', () => {
       assignedTo: 7,
     });
 
-    expect(toTaskDto(task)).toEqual({
+    const developer = Developer.create({ id: 7, name: 'Ada Lovelace', skills: [Skills.BACKEND] });
+
+    expect(toTaskDto(task, developer)).toEqual({
       id: 12,
       title: 'Test Task',
       status: TaskStatus.IN_PROGRESS,
       skillsRequired: [Skills.BACKEND],
-      assignedTo: 7,
+      assignedTo: {
+        id: 7,
+        name: 'Ada Lovelace',
+        skills: [Skills.BACKEND],
+      },
     });
   });
 
@@ -32,7 +39,7 @@ describe('Task Mapper', () => {
       assignedTo: null,
     });
 
-    expect(toTaskDto(task)).toEqual({
+    expect(toTaskDto(task, null)).toEqual({
       id: 0,
       title: 'New Task',
       status: TaskStatus.TODO,

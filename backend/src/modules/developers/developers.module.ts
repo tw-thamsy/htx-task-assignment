@@ -10,5 +10,6 @@ import { DeveloperTypeOrm } from './developer.typeorm.js';
   imports: [TypeOrmModule.forFeature([DeveloperTypeOrm])],
   controllers: [DeveloperController],
   providers: [DeveloperRepository, DeveloperService],
+  exports: [DeveloperService],
 })
 export class DevelopersModule {}

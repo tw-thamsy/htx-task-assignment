@@ -1,12 +1,14 @@
 import type { TaskDto } from '#shared/dtos/tasks/task.dto';
 import type { TaskStatus } from '#shared/task-status.constants';
 
+import { buildApiError } from './error';
+
 export async function fetchTasks(): Promise<TaskDto[]> {
   const { apiUrl } = window.APP_CONFIG;
   const response = await fetch(`${apiUrl.replace(/\/$/, '')}/tasks`);
 
   if (!response.ok) {
-    throw new Error(`Failed to load tasks (${response.status})`);
+    throw await buildApiError(response, `Failed to load tasks (${response.status})`);
   }
 
   return response.json() as Promise<TaskDto[]>;
@@ -23,7 +25,7 @@ export async function updateTaskStatus(taskId: number, status: TaskStatus): Prom
   });
 
   if (!response.ok) {
-    throw new Error(`Failed to update task status (${response.status})`);
+    throw await buildApiError(response, `Failed to update task status (${response.status})`);
   }
 }
 
@@ -38,6 +40,6 @@ export async function assignTask(taskId: number, developerId: number | null): Pr
   });
 
   if (!response.ok) {
-    throw new Error(`Failed to assign task (${response.status})`);
+    throw await buildApiError(response, `Failed to assign task (${response.status})`);
   }
 }

@@ -1,11 +1,13 @@
 import type { DeveloperDto } from '#shared/dtos/developers/developer.dto';
 
-export async function fetchDevelopers() {
+import { buildApiError } from './error';
+
+export async function fetchDevelopers(): Promise<DeveloperDto[]> {
   const { apiUrl } = window.APP_CONFIG;
   const response = await fetch(`${apiUrl.replace(/\/$/, '')}/developers`);
 
   if (!response.ok) {
-    throw new Error(`Failed to load developers (${response.status})`);
+    throw await buildApiError(response, `Failed to load developers (${response.status})`);
   }
 
   return response.json() as Promise<DeveloperDto[]>;

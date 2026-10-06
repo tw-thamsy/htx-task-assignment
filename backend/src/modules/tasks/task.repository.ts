@@ -19,7 +19,7 @@ export class TaskRepository {
   }
 
   async getAllTasks(): Promise<Task[]> {
-    const tasks = await this.tasks.find();
+    const tasks = await this.tasks.find({ order: { id: 'ASC' } });
     return tasks.map(toTask);
   }
 

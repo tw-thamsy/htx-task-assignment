@@ -30,7 +30,7 @@ describe('TaskRepository integration', () => {
     expect(createdTask.props.assignedTo).toBe(task.props.assignedTo);
   });
 
-  it('should list all tasks', async () => {
+  it('should list all tasks in asc order', async () => {
     const firstTask = await repository.createTask(
       Task.create({
         id: null,
@@ -57,6 +57,9 @@ describe('TaskRepository integration', () => {
     );
     expect(tasks.find((task) => task.props.id === firstTask.props.id)?.props).toStrictEqual(
       firstTask.props,
+    );
+    expect(tasks.findIndex((task) => task.props.id === firstTask.props.id)).toBeLessThan(
+      tasks.findIndex((task) => task.props.id === secondTask.props.id),
     );
   });
 

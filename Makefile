@@ -33,6 +33,7 @@ migrate_dev:
 ## test
 test:
 	cd backend && npm test
+	cd frontend && npm test
 
 ## Lint
 lint:

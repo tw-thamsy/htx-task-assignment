@@ -1,5 +1,30 @@
 # htx-task-assignment
 
+## Deploy (Just launch, not for development)
+
+Requires `make`, and `docker`
+
+1. Build all Docker containers
+
+   ```bash
+   make build
+   ```
+
+1. (Optional) Export OpenAI key to use the classifier. OR add it into [.env.backend-dev](deployments/dev/.env.backend-dev) file
+
+   ```bash
+   export OPENAI_API_KEY=<openai_api_key_here>
+   ```
+
+1. Deploy with `docker compose`
+
+   ```bash
+   make deploy_dev
+   # `make deploy_dev_down` to stop (try it if there's any errors in deployment)
+   ```
+
+1. Open http://localhost:81
+
 ## Setup
 
 1. Clone the repository:
@@ -69,20 +94,4 @@
    ```bash
    cd frontend
    npm run dev
-   ```
-
-## Deploy (all docker containers)
-
-Requires `make`, install if not yet installed
-
-1. Build all Docker containers
-
-   ```bash
-   make build
-   ```
-
-1. Deploy with `docker compose`
-   ```bash
-   make deploy_dev
-   # `make deploy_dev_down` to stop
    ```

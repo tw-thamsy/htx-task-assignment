@@ -1,4 +1,12 @@
-import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator';
+import { Type } from 'class-transformer';
+import {
+  IsEnum,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  MaxLength,
+  ValidateNested,
+} from 'class-validator';
 
 import type { CreateTaskDto } from '#shared/dtos/tasks/create-task.dto';
 import { Skills } from '#shared/skills.constants';
@@ -12,4 +20,9 @@ export class CreateTaskValidationDto implements CreateTaskDto {
   @IsOptional()
   @IsEnum(Skills, { each: true })
   skillsRequired?: Skills[];
+
+  @IsOptional()
+  @ValidateNested({ each: true })
+  @Type(() => CreateTaskValidationDto)
+  subtasks?: CreateTaskValidationDto[] | undefined;
 }

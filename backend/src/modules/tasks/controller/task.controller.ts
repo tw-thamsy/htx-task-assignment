@@ -18,9 +18,9 @@ export class TaskController {
   ) {}
 
   @Post()
-  async createTask(@Body() task: CreateTaskValidationDto): Promise<TaskDto> {
-    const createdTask = await this.taskService.createTask(task);
-    return this.mapTask(createdTask);
+  async createTaskAndSubtasks(@Body() task: CreateTaskValidationDto): Promise<TaskDto[]> {
+    const createdTasks = await this.taskService.createTaskAndSubtasks(task);
+    return Promise.all(createdTasks.map((task) => this.mapTask(task)));
   }
 
   @Get()

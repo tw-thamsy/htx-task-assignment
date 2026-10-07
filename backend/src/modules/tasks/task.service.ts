@@ -21,7 +21,10 @@ export class TaskService {
     private readonly skillClassifier: SkillClassifier,
   ) {}
 
-  async createTask(task: CreateTaskDto): Promise<Task> {
+  async createTaskAndSubtasks(
+    task: CreateTaskDto,
+    subtaskOf: number | null = null,
+  ): Promise<Task[]> {
     const newTask = Task.create({
       id: null,
       title: task.title,
@@ -30,9 +33,20 @@ export class TaskService {
         ? task.skillsRequired
         : await this.classifySkills(task.title),
       assignedTo: null,
-      subtaskOf: null,
+      subtaskOf: subtaskOf,
     });
-    return this.repo.createTask(newTask);
+
+    const createdTask = await this.repo.createTask(newTask);
+    const subtasks: Task[] = [];
+
+    if (task.subtasks?.length) {
+      for (const subtask of task.subtasks) {
+        const createdSubtasks = await this.createTaskAndSubtasks(subtask, createdTask.props.id);
+        subtasks.push(...createdSubtasks);
+      }
+    }
+
+    return [createdTask, ...subtasks];
   }
 
   private async classifySkills(title: string): Promise<Skills[]> {

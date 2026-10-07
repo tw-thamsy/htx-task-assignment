@@ -12,7 +12,20 @@ post {
 
 body:json {
   {
-    "title": "Create a task"
+    "title": "Task X",
+    "subtasks": [
+      {
+        "title": "Subtask X.1"
+      },
+      {
+        "title": "Subtask X.2",
+        "subtasks": [
+          {
+            "title": "Subtask X.2.1"
+          }
+        ]
+      }
+    ]
   }
 }
 

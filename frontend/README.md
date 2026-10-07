@@ -1,28 +1,11 @@
-# React + TypeScript + Vite
+## NPM scripts
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Run these commands from the `frontend` directory after installing dependencies with `npm ci`.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
-
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+- `npm run dev` starts the Vite development server with hot reloading.
+- `npm run build` runs the TypeScript project build (`tsc -b`) and creates the production bundle with Vite in `dist/`.
+- `npm run preview` serves the production bundle from `dist/` locally. Run `npm run build` first.
+- `npm run storybook` starts the Storybook development server at `http://localhost:6006`.
+- `npm run build-storybook` builds the Storybook site into `storybook-static/`.
+- `npm test` starts Vitest in its default interactive/watch mode for frontend tests.
+- `npm run test:storybook` runs Vitest tests for the Storybook project.

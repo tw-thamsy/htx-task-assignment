@@ -95,3 +95,11 @@ Requires `make`, and `docker`
    cd frontend
    npm run dev
    ```
+
+## Development
+
+Install [bruno](https://www.usebruno.com/) the API client. And import the collection from the [/api](api) folder. Environment and example http requests are all there.
+
+## Design decisions
+
+Refer to [design-decisions.md](docs/design-decisions.md)

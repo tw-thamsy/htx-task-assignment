@@ -23,6 +23,14 @@ export class TaskRepository {
     return tasks.map(toTask);
   }
 
+  async getAllSubtasksDepth1(parentId: number): Promise<Task[]> {
+    const subtasks = await this.tasks.find({
+      where: { subtaskOf: parentId },
+      order: { id: 'ASC' },
+    });
+    return subtasks.map(toTask);
+  }
+
   async getTaskById(id: number): Promise<Task | null> {
     const task = await this.tasks.findOneBy({ id });
     return task ? toTask(task) : null;

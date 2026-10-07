@@ -6,7 +6,10 @@ import { TaskStatus } from '#shared/task-status.constants';
 
 import { DeveloperService } from '../developers/developer.service.js';
 import { SkillClassifier } from '../skill-classifier/skill-classifier.js';
-import { throwIfCannotAssignTaskToDeveloper } from './task-rules.js';
+import {
+  throwIfCannotAssignTaskToDeveloper,
+  throwIfNotAllSubtasksCompletedAndParentTaskStatusTransitionToDone,
+} from './task-rules.js';
 import { Task } from './task.entity.js';
 import { TaskRepository } from './task.repository.js';
 
@@ -72,6 +75,10 @@ export class TaskService {
 
   async updateTaskStatus(id: number, status: TaskStatus): Promise<Task> {
     const task = await this.getTaskById(id);
+
+    const subtasks = await this.repo.getAllSubtasksDepth1(id);
+    throwIfNotAllSubtasksCompletedAndParentTaskStatusTransitionToDone(status, subtasks);
+
     task.updateStatus(status);
     return this.repo.updateTask(task);
   }

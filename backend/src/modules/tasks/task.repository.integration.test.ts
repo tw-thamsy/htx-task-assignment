@@ -68,6 +68,60 @@ describe('TaskRepository integration', () => {
     );
   });
 
+  it('should get all subtasks of a task', async () => {
+    const parentTask = await repository.createTask(
+      Task.create({
+        id: null,
+        title: 'Parent task',
+        status: TaskStatus.TODO,
+        skillsRequired: [],
+        assignedTo: null,
+        subtaskOf: null,
+      }),
+    );
+
+    const subtask1 = await repository.createTask(
+      Task.create({
+        id: null,
+        title: 'Subtask 1',
+        status: TaskStatus.TODO,
+        skillsRequired: [],
+        assignedTo: null,
+        subtaskOf: parentTask.props.id!,
+      }),
+    );
+
+    const subtask2 = await repository.createTask(
+      Task.create({
+        id: null,
+        title: 'Subtask 2',
+        status: TaskStatus.TODO,
+        skillsRequired: [],
+        assignedTo: null,
+        subtaskOf: parentTask.props.id!,
+      }),
+    );
+
+    // Create a sub-subtask to ensure it is not included in the depth 1 subtasks list
+    await repository.createTask(
+      Task.create({
+        id: null,
+        title: 'Sub-subtask',
+        status: TaskStatus.TODO,
+        skillsRequired: [],
+        assignedTo: null,
+        subtaskOf: subtask1.props.id!,
+      }),
+    );
+
+    const subtasks = await repository.getAllSubtasksDepth1(parentTask.props.id!);
+
+    expect(subtasks).toHaveLength(2);
+    expect(subtasks.map((task) => task.props.id)).toEqual(
+      expect.arrayContaining([subtask1.props.id, subtask2.props.id]),
+    );
+  });
+
   it('should get a task by id', async () => {
     const createdTask = await repository.createTask(
       Task.create({

@@ -30,6 +30,7 @@ export class TaskService {
         ? task.skillsRequired
         : await this.classifySkills(task.title),
       assignedTo: null,
+      subtaskOf: null,
     });
     return this.repo.createTask(newTask);
   }

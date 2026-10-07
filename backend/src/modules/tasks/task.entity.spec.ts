@@ -11,12 +11,14 @@ describe('Task Entity', () => {
       status: TaskStatus.IN_PROGRESS,
       skillsRequired: [Skills.BACKEND],
       assignedTo: null,
+      subtaskOf: 2,
     });
     expect(task.props.title).toBe('Test Task');
     expect(task.props.status).toBe(TaskStatus.IN_PROGRESS);
     expect(task.props.assignedTo).toBeNull();
     expect(task.props.skillsRequired).toEqual([Skills.BACKEND]);
     expect(task.props.id).toBeNull();
+    expect(task.props.subtaskOf).toBe(2);
   });
 
   it('should throw an error if trying to set the ID after creation', () => {
@@ -26,6 +28,7 @@ describe('Task Entity', () => {
       status: TaskStatus.IN_PROGRESS,
       skillsRequired: [Skills.FRONTEND],
       assignedTo: null,
+      subtaskOf: null,
     });
     expect(() => task.setId(2)).toThrow('ID is already set');
   });
@@ -37,6 +40,7 @@ describe('Task Entity', () => {
       status: TaskStatus.TODO,
       skillsRequired: [],
       assignedTo: null,
+      subtaskOf: null,
     });
     task.updateStatus(TaskStatus.IN_PROGRESS);
     expect(task.props.status).toBe(TaskStatus.IN_PROGRESS);
@@ -49,6 +53,7 @@ describe('Task Entity', () => {
       status: TaskStatus.TODO,
       skillsRequired: [Skills.BACKEND],
       assignedTo: null,
+      subtaskOf: null,
     });
     task.setAssignedTo(5);
     expect(task.props.assignedTo).toBe(5);

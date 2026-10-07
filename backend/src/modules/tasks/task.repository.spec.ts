@@ -14,6 +14,7 @@ describe('Task Repository Mappers', () => {
         status: TaskStatus.IN_PROGRESS,
         skillsRequired: [Skills.BACKEND],
         assignedTo: null,
+        subtaskOf: 2,
       }),
     );
     expect(ormTask.id).toBeUndefined();
@@ -21,6 +22,7 @@ describe('Task Repository Mappers', () => {
     expect(ormTask.status).toBe(TaskStatus.IN_PROGRESS);
     expect(ormTask.skillsRequired).toEqual([Skills.BACKEND]);
     expect(ormTask.assignedTo).toBeNull();
+    expect(ormTask.subtaskOf).toBe(2);
   });
 
   it('should map a TaskTypeOrm to a Task entity correctly', () => {
@@ -30,6 +32,7 @@ describe('Task Repository Mappers', () => {
       status: TaskStatus.IN_PROGRESS,
       skillsRequired: [Skills.FRONTEND],
       assignedTo: null,
+      subtaskOf: null,
     };
     const task = toTask(ormTask);
 
@@ -38,5 +41,6 @@ describe('Task Repository Mappers', () => {
     expect(task.props.status).toBe(ormTask.status);
     expect(task.props.skillsRequired).toStrictEqual(ormTask.skillsRequired);
     expect(task.props.assignedTo).toBe(ormTask.assignedTo);
+    expect(task.props.subtaskOf).toBe(ormTask.subtaskOf);
   });
 });

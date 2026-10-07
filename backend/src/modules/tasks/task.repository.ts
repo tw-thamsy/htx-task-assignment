@@ -47,5 +47,6 @@ export function toTask(ormTask: TaskTypeOrm): Task {
     status: ormTask.status,
     skillsRequired: ormTask.skillsRequired,
     assignedTo: ormTask.assignedTo,
+    subtaskOf: ormTask.subtaskOf,
   });
 }

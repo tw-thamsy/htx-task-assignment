@@ -9,6 +9,7 @@ type TaskProps = {
   status: TaskStatus;
   skillsRequired: Skills[];
   assignedTo: number | null;
+  subtaskOf: number | null;
 };
 
 export class Task {

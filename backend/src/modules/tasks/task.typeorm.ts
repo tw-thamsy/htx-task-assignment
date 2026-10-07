@@ -19,4 +19,7 @@ export class TaskTypeOrm {
 
   @Column({ name: 'assigned_to', type: 'bigint', nullable: true })
   readonly assignedTo: number | null;
+
+  @Column({ name: 'subtask_of', type: 'bigint', nullable: true })
+  readonly subtaskOf: number | null;
 }

@@ -32,6 +32,7 @@ describe('TaskService.createTask', () => {
       status: TaskStatus.TODO,
       skillsRequired: [Skills.FRONTEND],
       assignedTo: null,
+      subtaskOf: null,
     });
   });
 

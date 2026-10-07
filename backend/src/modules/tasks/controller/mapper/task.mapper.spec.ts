@@ -13,6 +13,7 @@ describe('Task Mapper', () => {
       status: TaskStatus.IN_PROGRESS,
       skillsRequired: [Skills.BACKEND],
       assignedTo: 7,
+      subtaskOf: null,
     });
 
     const developer = Developer.create({ id: 7, name: 'Ada Lovelace', skills: [Skills.BACKEND] });
@@ -37,6 +38,7 @@ describe('Task Mapper', () => {
       status: TaskStatus.TODO,
       skillsRequired: [Skills.FRONTEND],
       assignedTo: null,
+      subtaskOf: null,
     });
 
     expect(toTaskDto(task, null)).toEqual({

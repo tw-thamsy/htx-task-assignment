@@ -20,6 +20,7 @@ describe('TaskRepository integration', () => {
       status: TaskStatus.TODO,
       skillsRequired: [],
       assignedTo: null,
+      subtaskOf: null,
     });
 
     const createdTask = await repository.createTask(task);
@@ -27,7 +28,9 @@ describe('TaskRepository integration', () => {
     expect(createdTask.props.id).not.toBeNull();
     expect(createdTask.props.title).toBe(task.props.title);
     expect(createdTask.props.status).toBe(task.props.status);
+    expect(createdTask.props.skillsRequired).toStrictEqual(task.props.skillsRequired);
     expect(createdTask.props.assignedTo).toBe(task.props.assignedTo);
+    expect(createdTask.props.subtaskOf).toBe(task.props.subtaskOf);
   });
 
   it('should list all tasks in asc order', async () => {
@@ -38,6 +41,7 @@ describe('TaskRepository integration', () => {
         status: TaskStatus.TODO,
         skillsRequired: [Skills.BACKEND, Skills.FRONTEND],
         assignedTo: null,
+        subtaskOf: null,
       }),
     );
     const secondTask = await repository.createTask(
@@ -47,6 +51,7 @@ describe('TaskRepository integration', () => {
         status: TaskStatus.IN_PROGRESS,
         skillsRequired: [],
         assignedTo: null,
+        subtaskOf: null,
       }),
     );
 
@@ -71,6 +76,7 @@ describe('TaskRepository integration', () => {
         status: TaskStatus.IN_PROGRESS,
         skillsRequired: [],
         assignedTo: null,
+        subtaskOf: null,
       }),
     );
 
@@ -93,6 +99,7 @@ describe('TaskRepository integration', () => {
         status: TaskStatus.TODO,
         skillsRequired: [],
         assignedTo: null,
+        subtaskOf: null,
       }),
     );
 

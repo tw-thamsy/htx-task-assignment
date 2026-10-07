@@ -14,6 +14,7 @@ describe('Task Rules', () => {
       status: TaskStatus.TODO,
       skillsRequired: [Skills.BACKEND, Skills.FRONTEND],
       assignedTo: null,
+      subtaskOf: null,
     });
     const developer = Developer.create({
       id: 2,
@@ -31,6 +32,7 @@ describe('Task Rules', () => {
       status: TaskStatus.TODO,
       skillsRequired: [Skills.BACKEND, Skills.FRONTEND],
       assignedTo: null,
+      subtaskOf: null,
     });
     const developer = Developer.create({
       id: 2,
@@ -50,6 +52,7 @@ describe('Task Rules', () => {
       status: TaskStatus.TODO,
       skillsRequired: [],
       assignedTo: null,
+      subtaskOf: null,
     });
     const developer = Developer.create({
       id: 2,

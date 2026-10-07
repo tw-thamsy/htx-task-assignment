@@ -43,6 +43,7 @@ export const Default: Story = {
     await expect(canvas.getByRole('textbox', { name: 'Title' })).toHaveValue('');
     await expect(canvas.getByRole('combobox', { name: 'Skills Required' })).toBeVisible();
     await expect(canvas.getByRole('button', { name: 'Submit' })).toBeEnabled();
+    await expect(canvas.getByRole('button', { name: 'Add Subtask' })).toBeVisible();
   },
 };
 
@@ -82,7 +83,7 @@ export const TitleTooLong: Story = {
   },
 };
 
-export const SuccessfulCreation: Story = {
+export const SuccessfulCreationWithSubtasks: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const page = within(canvasElement.ownerDocument.body);
@@ -91,6 +92,20 @@ export const SuccessfulCreation: Story = {
     await userEvent.click(await page.findByRole('option', { name: 'Frontend' }));
     await userEvent.click(page.getByRole('option', { name: 'Backend' }));
     await userEvent.keyboard('{Escape}');
+
+    // Create subtask
+    const addSubtaskButton = canvas.getByRole('button', { name: 'Add Subtask' });
+    await userEvent.click(addSubtaskButton);
+    const subtaskTitle = canvas.getAllByRole('textbox', { name: 'Title' })[1];
+    await userEvent.type(subtaskTitle, 'Subtask');
+
+    // Create subsubtask
+    const subtaskAddSubtaskButton = canvas.getAllByRole('button', { name: 'Add Subtask' })[1];
+    await userEvent.click(subtaskAddSubtaskButton);
+    const subsubtaskTitle = canvas.getAllByRole('textbox', { name: 'Title' })[2];
+    await userEvent.type(subsubtaskTitle, 'Subsubtask');
+
+    // Submit the form
     await userEvent.click(canvas.getByRole('button', { name: 'Submit' }));
 
     await expect(await canvas.findByRole('heading', { name: 'Tasks' })).toBeVisible();
@@ -98,6 +113,18 @@ export const SuccessfulCreation: Story = {
     await expect(createTask).toHaveBeenCalledWith({
       title: 'New task',
       skillsRequired: [Skills.FRONTEND, Skills.BACKEND],
+      subtasks: [
+        {
+          title: 'Subtask',
+          skillsRequired: [],
+          subtasks: [
+            {
+              title: 'Subsubtask',
+              skillsRequired: [],
+            },
+          ],
+        },
+      ],
     });
   },
 };

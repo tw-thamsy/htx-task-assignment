@@ -1,6 +1,6 @@
 import { Box, Button } from '@mui/material';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useState, type FormEvent } from 'react';
+import { useState, type SubmitEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import type { CreateTaskDto } from '#shared/dtos/tasks/create-task.dto';
@@ -8,7 +8,7 @@ import type { CreateTaskDto } from '#shared/dtos/tasks/create-task.dto';
 import { createTask } from '../../../api/tasks';
 import ErrorSnackbar from '../../../components/ErrorSnackbar';
 import TaskCreationFormWoSubmit from './TaskCreationFormWoSubmit';
-import { validateTitle } from './TitleInput.utils';
+import { isCreateTaskDtoValid } from './TitleInput.utils';
 
 export default function TaskCreationForm() {
   const navigate = useNavigate();
@@ -32,10 +32,10 @@ export default function TaskCreationForm() {
     skillsRequired: [],
   });
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     setHasSubmittedOnce(true);
-    if (validateTitle(createTaskDto.title) || mutation.isPending) {
+    if (!isCreateTaskDtoValid(createTaskDto) || mutation.isPending) {
       return;
     }
     setOpenSnackbar(false);

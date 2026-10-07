@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { fn, expect, within } from 'storybook/test';
+import { fn, expect, within, userEvent } from 'storybook/test';
 
 import TaskCreationFormWoSubmit from './TaskCreationFormWoSubmit';
 
@@ -43,5 +43,28 @@ export const Disabled: Story = {
     await expect(title).toBeDisabled();
     const skillsRequired = canvas.getByRole('combobox', { name: 'Skills Required' });
     await expect(skillsRequired).toHaveAttribute('aria-disabled', 'true');
+  },
+};
+
+export const WithSubtasks: Story = {
+  args: {
+    onChange: fn(),
+    showError: false,
+    isDisabled: false,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const addSubtaskButton = canvas.getByRole('button', { name: 'Add Subtask' });
+    await expect(addSubtaskButton).toBeInTheDocument();
+
+    await userEvent.click(addSubtaskButton);
+    const titles = canvas.getAllByRole('textbox', { name: 'Title' });
+    await expect(titles).toHaveLength(2);
+
+    const subtaskAddSubtaskButton = canvas.getAllByRole('button', { name: 'Add Subtask' })[1];
+    await expect(subtaskAddSubtaskButton).toBeInTheDocument();
+    await userEvent.click(subtaskAddSubtaskButton);
+    const subtaskTitles = canvas.getAllByRole('textbox', { name: 'Title' });
+    await expect(subtaskTitles).toHaveLength(3);
   },
 };

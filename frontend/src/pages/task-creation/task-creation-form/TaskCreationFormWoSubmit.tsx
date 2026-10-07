@@ -1,4 +1,5 @@
-import { Box, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import { Box, Button, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import { useState } from 'react';
 
 import type { CreateTaskDto } from '#shared/dtos/tasks/create-task.dto';
@@ -20,44 +21,83 @@ export default function TaskCreationFormWoSubmit({
     skillsRequired: [],
   });
 
+  const addSubtask = () => {
+    const newCreateTaskDto: CreateTaskDto = {
+      ...createTaskDto,
+      subtasks: [...(createTaskDto.subtasks || []), { title: '', skillsRequired: [] }],
+    };
+    setCreateTaskDto(newCreateTaskDto);
+    onChange(newCreateTaskDto);
+  };
+
   return (
     <Box
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        gap: 3,
+        gap: 6,
       }}
     >
-      <TitleInput
-        value={createTaskDto.title}
-        onChange={(title) => {
-          const newCreateTaskDto = { ...createTaskDto, title };
-          setCreateTaskDto(newCreateTaskDto);
-          onChange(newCreateTaskDto);
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 3,
         }}
-        showError={showError}
-        disabled={isDisabled}
-      />
-      <FormControl fullWidth disabled={isDisabled}>
-        <InputLabel id="skills-label">Skills Required</InputLabel>
-        <Select
-          labelId="skills-label"
-          multiple
-          value={createTaskDto.skillsRequired}
-          onChange={(e) => {
-            const newCreateTaskDto = {
-              ...createTaskDto,
-              skillsRequired: e.target.value as Skills[],
-            };
+      >
+        <TitleInput
+          value={createTaskDto.title}
+          onChange={(title) => {
+            const newCreateTaskDto = { ...createTaskDto, title };
             setCreateTaskDto(newCreateTaskDto);
             onChange(newCreateTaskDto);
           }}
-          label="Skills Required"
-        >
-          <MenuItem value={Skills.FRONTEND}>Frontend</MenuItem>
-          <MenuItem value={Skills.BACKEND}>Backend</MenuItem>
-        </Select>
-      </FormControl>
+          showError={showError}
+          disabled={isDisabled}
+        />
+        <FormControl fullWidth disabled={isDisabled}>
+          <InputLabel id="skills-label">Skills Required</InputLabel>
+          <Select
+            labelId="skills-label"
+            multiple
+            value={createTaskDto.skillsRequired}
+            onChange={(e) => {
+              const newCreateTaskDto = {
+                ...createTaskDto,
+                skillsRequired: e.target.value as Skills[],
+              };
+              setCreateTaskDto(newCreateTaskDto);
+              onChange(newCreateTaskDto);
+            }}
+            label="Skills Required"
+          >
+            <MenuItem value={Skills.FRONTEND}>Frontend</MenuItem>
+            <MenuItem value={Skills.BACKEND}>Backend</MenuItem>
+          </Select>
+        </FormControl>
+        <Button variant="outlined" endIcon={<AddIcon />} onClick={addSubtask}>
+          Add Subtask
+        </Button>
+      </Box>
+      <Box
+        sx={{
+          marginLeft: 3,
+        }}
+      >
+        {createTaskDto.subtasks?.map((_, index) => (
+          <TaskCreationFormWoSubmit
+            onChange={(newSubtask) => {
+              const newCreateTaskDto = { ...createTaskDto };
+              newCreateTaskDto.subtasks![index] = newSubtask;
+              setCreateTaskDto(newCreateTaskDto);
+              onChange(newCreateTaskDto);
+            }}
+            showError={showError}
+            isDisabled={isDisabled}
+            key={index}
+          />
+        ))}
+      </Box>
     </Box>
   );
 }

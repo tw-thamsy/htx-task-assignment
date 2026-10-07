@@ -8,7 +8,8 @@ import { Skills } from '#shared/skills.constants';
 
 import { createTask } from '../../../api/tasks';
 import ErrorSnackbar from '../../../components/ErrorSnackbar';
-import TitleInput, { validateTitle } from './TitleInput';
+import TitleInput from './TitleInput';
+import { validateTitle } from './TitleInput.utils';
 
 export default function TaskCreationForm() {
   const navigate = useNavigate();

@@ -31,6 +31,12 @@ This is intentional. Because these restrictions seem more like guidance rather t
 
 If needed, there can be another functionality to provide warnings when these restrictions are violated. It need not be the case that these restrictions be treated as domain rules that cannot be untrue under any circumstances.
 
+#### Skills as constants (not in DB)
+
+The Skills can be put into the DB table. This seems to be the instruction of the Take Home Test. However, given the features that needs to be developed, it is sufficient to leave them as constants.
+
+When the need arises (for example, the dynamic adding and removing of defined skills), it can be added into the database then. Else, there seems to be little benefit to storing them in a database. It adds overhead without providing additonal functionality or performance.
+
 ### 2. Integration Tests
 
 Integration tests are implemented mainly for the repository layer, to ensure that the calls to the DB are correct, and transformed into the needed entities.

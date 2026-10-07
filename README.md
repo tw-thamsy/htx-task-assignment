@@ -1,8 +1,8 @@
 # htx-task-assignment
 
-## Deploy (Just launch, not for development)
+## Deploy (run the application without a development workflow)
 
-Requires `make`, and `docker`
+Requires `make` and Docker with Docker Compose.
 
 1. Build all Docker containers
 
@@ -10,7 +10,7 @@ Requires `make`, and `docker`
    make build
    ```
 
-1. (Optional) Export OpenAI key to use the classifier. OR add it into [.env.backend-dev](deployments/dev/.env.backend-dev) file
+1. (Optional) Set an OpenAI API key to enable title-based skill classification. Export it in your shell or add it to the [development backend environment file](deployments/dev/.env.backend-dev):
 
    ```bash
    export OPENAI_API_KEY=<openai_api_key_here>
@@ -20,12 +20,13 @@ Requires `make`, and `docker`
 
    ```bash
    make deploy_dev
-   # `make deploy_dev_down` to stop (try it if there's any errors in deployment)
    ```
+
+Stop the deployment with `make deploy_dev_down`.
 
 1. Open http://localhost:81
 
-## Setup
+## Development setup
 
 1. Clone the repository:
 
@@ -34,37 +35,35 @@ Requires `make`, and `docker`
    cd htx-task-assignment
    ```
 
-1. Install infrastructure dependencies:
+1. Install the required tools:
 
-- NodeJS v24.21.0
-  - This repository uses `asdf` to manage the nodeJS versions. However, feel free to use `nvm` or download from the [Official NodeJS Website](https://nodejs.org/en/download).
+- Node.js v24.21.0. The repository uses `asdf` to manage Node.js versions, but you can use `nvm` or install it from the [official Node.js website](https://nodejs.org/en/download).
 
-    ```bash
-    asdf install
-    ```
+  ```bash
+  asdf install
+  ```
 
 - Docker
-  - Install docker
+  - On macOS, install Docker and Colima with Homebrew:
 
     ```bash
-    # If using MacOS, install docker with HomeBrew, and Colima for the runtime
     brew install docker colima
     ```
 
-1. Install application dependencies
+1. Install dependencies from the repository root and each application directory:
 
-- Tools for whole repo (linters)
+- Repository tools, including linters (run from the repository root):
   ```bash
   npm ci
   ```
-- Backend
+- Backend (run from `backend/`):
   ```bash
   cd backend
   cp .env.example .env
   npm ci
   cd -
   ```
-- Frontend
+- Frontend (run from `frontend/`):
   ```bash
   cd frontend
   npm ci
@@ -73,24 +72,25 @@ Requires `make`, and `docker`
 
 ## Quickstart
 
-1. Start Infrastructure
-   - Start Docker (if not already autostarted)
-     ```bash
-     colima start
-     ```
-   - Deploy Postgres and Migrate
-     ```bash
-     make deploy_local_infra
-     ```
+1. Start the infrastructure:
 
-1. Run Backend
+- Start Colima if it is not already running:
+  ```bash
+  colima start
+  ```
+- Start PostgreSQL and apply database migrations:
+  ```bash
+  make deploy_local_infra
+  ```
+
+1. In a terminal, start the backend:
 
    ```bash
    cd backend
    npm run start:dev
    ```
 
-1. Run Frontend
+1. In another terminal, start the frontend:
    ```bash
    cd frontend
    npm run dev
@@ -98,7 +98,7 @@ Requires `make`, and `docker`
 
 ## Development
 
-Install [bruno](https://www.usebruno.com/) the API client. And import the collection from the [/api](api) folder. Environment and example http requests are all there.
+Install [Bruno](https://www.usebruno.com/) and import the collection from the [`api/`](api) directory. It contains example HTTP requests and environments; select the environment that matches the API instance you are using.
 
 ## Design decisions
 
